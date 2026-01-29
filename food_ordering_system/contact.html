@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - FoodHub</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">FoodHub</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="about.html">About</a>
+                <a href="contact.html" class="active">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </a>
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn btn-outline">Login</a>
+                    <a href="register.html" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Get in Touch</h1>
+            <p>We're here to help and answer any questions you might have</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <div class="contact-page">
+        <div class="container">
+            <div class="contact-layout">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="info-card">
+                        <h2>Contact Information</h2>
+                        <p>Fill out the form or contact us through other channels</p>
+                        
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="method-details">
+                                    <h3>Phone</h3>
+                                    <p>(123) 456-7890</p>
+                                    <p>Mon-Fri: 9am-6pm</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="method-details">
+                                    <h3>Email</h3>
+                                    <p>info@foodhub.com</p>
+                                    <p>support@foodhub.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <div class="method-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="method-details">
+                                    <h3>Address</h3>
+                                    <p>123 Food Street</p>
+                                    <p>City, State 12345</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <h3>Follow Us</h3>
+                            <div class="social-icons">
+                                <a href="#"><i class="fab fa-facebook"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <div class="form-card">
+                        <h2>Send us a Message</h2>
+                        
+                        <div id="contact-message"></div>
+                        
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="contact_name">Full Name *</label>
+                                    <input type="text" id="contact_name" name="name" required 
+                                           placeholder="Enter your name">
+                                    <span class="error-message" id="name-error"></span>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="contact_email">Email Address *</label>
+                                    <input type="email" id="contact_email" name="email" required 
+                                           placeholder="Enter your email">
+                                    <span class="error-message" id="email-error"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact_phone">Phone Number</label>
+                                <input type="tel" id="contact_phone" name="phone" 
+                                       placeholder="Enter phone number">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact_subject">Subject *</label>
+                                <select id="contact_subject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="order">Order Issue</option>
+                                    <option value="feedback">Feedback</option>
+                                    <option value="partnership">Partnership</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <span class="error-message" id="subject-error"></span>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="contact_message">Message *</label>
+                                <textarea id="contact_message" name="message" rows="5" required 
+                                          placeholder="Type your message here..."></textarea>
+                                <span class="error-message" id="message-error"></span>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+                                <span id="submitText">Send Message</span>
+                                <span id="submitLoading" class="loading" style="display: none;">
+                                    <i class="fas fa-spinner fa-spin"></i> Sending...
+                                </span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3>What are your delivery hours?</h3>
+                        <p>We deliver daily from 10:00 AM to 10:00 PM. Some areas may have extended hours.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>How long does delivery take?</h3>
+                        <p>Average delivery time is 30-45 minutes depending on your location and order volume.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>Do you offer vegetarian/vegan options?</h3>
+                        <p>Yes! We have a wide variety of vegetarian and vegan dishes clearly marked on our menu.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h3>Can I modify my order after placing it?</h3>
+                        <p>You can modify your order within 5 minutes of placing it by calling our support line.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 FoodHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/contact.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

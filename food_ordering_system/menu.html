@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - FoodHub</title>
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">FoodHub</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="menu.html" class="active">Menu</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search menu...">
+                    <button id="searchBtn"><i class="fas fa-search"></i></button>
+                </div>
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </a>
+                <div class="user-menu" id="userMenu">
+                    <button class="user-btn" id="userBtn">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="userName">Account</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="orders.html"><i class="fas fa-shopping-bag"></i> My Orders</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <div class="divider"></div>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menu Page -->
+    <div class="menu-page">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="menu-hero">
+                <h1>Our Delicious Menu</h1>
+                <p>Explore our wide variety of dishes prepared with love</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="menu-filters">
+                <div class="filter-group">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="1">Pizza</button>
+                    <button class="filter-btn" data-category="2">Burger</button>
+                    <button class="filter-btn" data-category="3">Pasta</button>
+                    <button class="filter-btn" data-category="4">Drinks</button>
+                    <button class="filter-btn" data-category="5">Desserts</button>
+                </div>
+                
+                <div class="sort-group">
+                    <label for="sortSelect">Sort by:</label>
+                    <select id="sortSelect">
+                        <option value="popular">Most Popular</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name">Name: A to Z</option>
+                        <option value="newest">Newest First</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Search Results -->
+            <div class="search-results" id="searchResults">
+                <h3>Search Results for: <span id="searchTerm"></span></h3>
+                <button class="clear-search" id="clearSearch">Clear Search</button>
+            </div>
+
+            <!-- Menu Grid -->
+            <div class="menu-grid" id="menuGrid">
+                <!-- Products loaded via JavaScript -->
+                <div class="loading-spinner" id="loadingSpinner">
+                    <i class="fas fa-spinner fa-spin"></i> Loading menu...
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <button class="page-btn prev" disabled>
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <div class="page-numbers" id="pageNumbers"></div>
+                <button class="page-btn next">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="modal" id="quickViewModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-body" id="modalBody">
+                <!-- Product details loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 FoodHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Product Card Template -->
+    <template id="product-card-template">
+        <div class="product-card" data-id="{{id}}" data-category="{{category_id}}">
+            <div class="product-badge" style="{{badge_style}}">{{badge_text}}</div>
+            <div class="product-image">
+                <img src="{{image_url}}" alt="{{name}}" loading="lazy">
+                <button class="quick-view-btn" data-id="{{id}}">
+                    <i class="fas fa-eye"></i> Quick View
+                </button>
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">{{name}}</h3>
+                <p class="product-description">{{description}}</p>
+                <div class="product-meta">
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <span>{{rating}}</span>
+                        <span class="reviews">({{review_count}})</span>
+                    </div>
+                    <div class="category">{{category_name}}</div>
+                </div>
+                <div class="product-footer">
+                    <div class="price">${{price}}</div>
+                    <button class="btn btn-primary add-to-cart" 
+                            data-product-id="{{id}}"
+                            data-product-name="{{name}}"
+                            data-product-price="{{price}}">
+                        <i class="fas fa-plus"></i> Add
+                    </button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Quick View Template -->
+    <template id="quick-view-template">
+        <div class="quick-view">
+            <div class="quick-view-image">
+                <img src="{{image_url}}" alt="{{name}}">
+            </div>
+            <div class="quick-view-details">
+                <h2>{{name}}</h2>
+                <div class="quick-view-rating">
+                    <div class="stars">
+                        {{stars}}
+                    </div>
+                    <span>{{rating}} ({{review_count}} reviews)</span>
+                </div>
+                <p class="quick-view-description">{{description}}</p>
+                <div class="quick-view-price">${{price}}</div>
+                
+                <div class="quick-view-options">
+                    <div class="quantity-selector">
+                        <label>Quantity:</label>
+                        <div class="quantity-controls">
+                            <button class="qty-btn minus"><i class="fas fa-minus"></i></button>
+                            <input type="number" class="qty-input" value="1" min="1" max="10">
+                            <button class="qty-btn plus"><i class="fas fa-plus"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="special-requests">
+                        <label>Special Requests (Optional)</label>
+                        <textarea placeholder="E.g. No onions, extra sauce..." rows="2"></textarea>
+                    </div>
+                </div>
+                
+                <div class="quick-view-actions">
+                    <button class="btn btn-primary btn-add" data-id="{{id}}">
+                        <i class="fas fa-cart-plus"></i> Add to Cart - ${{price}}
+                    </button>
+                    <button class="btn btn-outline btn-wishlist" data-id="{{id}}">
+                        <i class="far fa-heart"></i> Add to Wishlist
+                    </button>
+                </div>
+                
+                <div class="quick-view-nutrition">
+                    <h4>Nutrition Information</h4>
+                    <div class="nutrition-facts">
+                        <div class="nutrition-item">
+                            <span>Calories</span>
+                            <span>{{calories}} kcal</span>
+                        </div>
+                        <div class="nutrition-item">
+                            <span>Protein</span>
+                            <span>{{protein}}g</span>
+                        </div>
+                        <div class="nutrition-item">
+                            <span>Carbs</span>
+                            <span>{{carbs}}g</span>
+                        </div>
+                        <div class="nutrition-item">
+                            <span>Fat</span>
+                            <span>{{fat}}g</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="js/menu.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

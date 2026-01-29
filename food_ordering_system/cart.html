@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart - FoodHub</title>
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">FoodHub</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="menu.html">Menu</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <a href="cart.html" class="cart-icon active">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </a>
+                <div class="user-menu" id="userMenu">
+                    <button class="user-btn" id="userBtn">
+                        <i class="fas fa-user-circle"></i>
+                        <span id="userName">Account</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="profile.html"><i class="fas fa-user"></i> My Profile</a>
+                        <a href="orders.html"><i class="fas fa-shopping-bag"></i> My Orders</a>
+                        <a href="settings.html"><i class="fas fa-cog"></i> Settings</a>
+                        <div class="divider"></div>
+                        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Page -->
+    <div class="cart-page">
+        <div class="container">
+            <h1 class="page-title">Shopping Cart</h1>
+            
+            <div class="cart-layout">
+                <!-- Cart Items -->
+                <div class="cart-items">
+                    <div class="cart-header">
+                        <h2>Your Items (<span id="item-count">0</span>)</h2>
+                        <button class="clear-cart" id="clearCart">Clear All</button>
+                    </div>
+                    
+                    <div id="cart-empty" class="empty-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <h3>Your cart is empty</h3>
+                        <p>Add delicious items from our menu</p>
+                        <a href="menu.html" class="btn btn-primary">Browse Menu</a>
+                    </div>
+                    
+                    <div id="cart-items-container" class="items-container">
+                        <!-- Cart items will be loaded here -->
+                    </div>
+                </div>
+                
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <div class="summary-card">
+                        <h3>Order Summary</h3>
+                        
+                        <div class="summary-details">
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span id="subtotal">$0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Delivery Fee</span>
+                                <span id="delivery-fee">$2.99</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Tax (10%)</span>
+                                <span id="tax">$0.00</span>
+                            </div>
+                            <div class="summary-row discount-row">
+                                <div>
+                                    <span>Discount</span>
+                                    <button class="apply-coupon" id="applyCoupon">Apply Coupon</button>
+                                </div>
+                                <span id="discount">-$0.00</span>
+                            </div>
+                            <div class="divider"></div>
+                            <div class="summary-row total-row">
+                                <span>Total</span>
+                                <span id="total">$0.00</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Delivery Info -->
+                        <div class="delivery-info">
+                            <h4><i class="fas fa-truck"></i> Delivery Details</h4>
+                            <div class="address-select">
+                                <select id="deliveryAddress">
+                                    <option value="">Select delivery address</option>
+                                    <option value="home">Home: 123 Main St, City</option>
+                                    <option value="work">Work: 456 Office Rd, City</option>
+                                </select>
+                                <button class="btn-text" id="addAddress">+ Add New</button>
+                            </div>
+                            <div class="delivery-time">
+                                <label>Delivery Time</label>
+                                <div class="time-options">
+                                    <label class="time-option">
+                                        <input type="radio" name="deliveryTime" value="asap" checked>
+                                        <span>ASAP (30-45 mins)</span>
+                                    </label>
+                                    <label class="time-option">
+                                        <input type="radio" name="deliveryTime" value="schedule">
+                                        <span>Schedule Later</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Payment Method -->
+                        <div class="payment-method">
+                            <h4><i class="fas fa-credit-card"></i> Payment Method</h4>
+                            <div class="payment-options">
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="cash" checked>
+                                    <span>Cash on Delivery</span>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="card">
+                                    <span>Credit/Debit Card</span>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="paypal">
+                                    <span>PayPal</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Checkout Button -->
+                        <button class="btn btn-primary btn-block btn-checkout" id="checkoutBtn" disabled>
+                            <i class="fas fa-lock"></i> Proceed to Checkout
+                        </button>
+                        
+                        <p class="secure-checkout">
+                            <i class="fas fa-shield-alt"></i> Secure checkout guaranteed
+                        </p>
+                    </div>
+                    
+                    <!-- Promo Section -->
+                    <div class="promo-section">
+                        <h4><i class="fas fa-gift"></i> Special Offers</h4>
+                        <div class="promo-codes">
+                            <div class="promo-code">
+                                <span class="code">WELCOME20</span>
+                                <span class="discount">20% OFF</span>
+                                <span class="desc">First order</span>
+                            </div>
+                            <div class="promo-code">
+                                <span class="code">FREE50</span>
+                                <span class="discount">FREE DELIVERY</span>
+                                <span class="desc">Orders above $50</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FoodHub</h3>
+                    <p>Delicious food delivered to your door</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="menu.html">Menu</a>
+                    <a href="about.html">About Us</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <a href="faq.html">FAQ</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2024 FoodHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Item Template -->
+    <template id="cart-item-template">
+        <div class="cart-item" data-id="{{id}}">
+            <div class="item-image">
+                <img src="{{image}}" alt="{{name}}">
+            </div>
+            <div class="item-details">
+                <h3 class="item-name">{{name}}</h3>
+                <p class="item-description">{{description}}</p>
+                <div class="item-price">${{price}}</div>
+            </div>
+            <div class="item-quantity">
+                <button class="quantity-btn minus" data-action="decrease">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <span class="quantity">{{quantity}}</span>
+                <button class="quantity-btn plus" data-action="increase">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+            <div class="item-total">
+                <span>${{total}}</span>
+            </div>
+            <button class="item-remove" data-action="remove">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </template>
+
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
